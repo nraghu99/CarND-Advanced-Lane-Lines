@@ -26,6 +26,19 @@ The goals / steps of this project are the following:
 [im06]: ./projected_lanelines_output/projected_lanelines_test5.jpg "Projected Lane line 5"
 [im07]: ./projected_lanelines_output/projected_lanelines_test6.jpg "Projected Lane line 6"
 
+[bin01]: ./binary_images/bin_image_1.png "Binary Image1"
+[bin02]: ./binary_images/bin_image_2.png "Binary Image2"
+[bin03]: ./binary_images/bin_image_3.png "Binary Image3"
+[bin04]: ./binary_images/bin_image_4.png "Binary Image4"
+[bin05]: ./binary_images/bin_image_5.png "Binary Image5"
+[bin06]: ./binary_images/bin_image_6.png "Binary Image6"
+
+[undist01]: ./undistored_warped_images/undistored_warped_image1.png "Undistorted Image 1"
+[undist02]: ./undistored_warped_images/undistored_warped_image2.png "Undistorted Image 2"
+[undist03]: ./undistored_warped_images/undistored_warped_image3.png "Undistorted Image 3"
+[undist04]: ./undistored_warped_images/undistorted_warped_image4.png "Undistorted Image 4"
+[undist05]: ./undistored_warped_images/undistorted_warped_image5.png "Undistorted Image 5"
+[undist06]: ./undistored_warped_images/undistorted_warped_image6.png "Undistorted Image 6"
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
 
@@ -63,6 +76,17 @@ To demonstrate this step, I will describe how I apply the distortion correction 
 
 Cell number 4 and 5 has code that does absolute sobel, gradient magnitude threshold and direction gradient threshold
 The binary image output for this operation is displayed in the python notebook at the end of cell 5
+The input and output binary images are
+
+![bin01]
+![bin02]
+![bin03]
+![bin04]
+![bin05]
+![bin06]
+
+
+
 
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
@@ -75,6 +99,14 @@ I randomly chose destination points from source based on offsets
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
+The undistorted warped binary images are
+
+![undist01]
+![undist02]
+![undist03]
+![undist04]
+![undist05]
+![undist06]
 
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
