@@ -19,12 +19,12 @@ The goals / steps of this project are the following:
 
 
 [im01]: ./calibration_undist/undist_calibration2.jpg "Chessboard Calibration"
-[im02]: ./projected_lanelines_output/projected_lane_lines_test1.jpg "Projected Lane line 1"
-[im03]: ./projected_lanelines_output/projected_lane_lines_test2.jpg "Projected Lane line 2"
-[im04]: ./projected_lanelines_output/projected_lane_lines_tes31.jpg "Projected Lane line 3"
-[im05]: ./projected_lanelines_output/projected_lane_lines_test4.jpg "Projected Lane line 4"
-[im06]: ./projected_lanelines_output/projected_lane_lines_test5.jpg "Projected Lane line 5"
-[im07]: ./projected_lanelines_output/projected_lane_lines_test6.jpg "Projected Lane line 6"
+[im02]: ./projected_lanelines_output/projected_lanelines_test1.jpg "Projected Lane line 1"
+[im03]: ./projected_lanelines_output/projected_lanelines_test2.jpg "Projected Lane line 2"
+[im04]: ./projected_lanelines_output/projected_lanelines_tes31.jpg "Projected Lane line 3"
+[im05]: ./projected_lanelines_output/projected_lanelines_test4.jpg "Projected Lane line 4"
+[im06]: ./projected_lanelines_output/projected_lanelines_test5.jpg "Projected Lane line 5"
+[im07]: ./projected_lanelines_output/projected_lanelines_test6.jpg "Projected Lane line 6"
 
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
@@ -81,21 +81,24 @@ I verified that my perspective transform was working as expected by drawing the 
 
 I have 2 methods for this, sliding_window_polyfit in cell 7 and prev_frame_polyfit in cell 9
 
-The images from projecting the lane lines are
 
-![im02]
+
+
 
 
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
-I did this in lines # through # in my code in `my_other_file.py`
+I am calculating the radius of curvature in cell 10 and also displaying the curvature of a sample image in cell 11
 
 #### 6. Provide an example image of your result plotted back down onto the road such that the lane area is identified clearly.
+This is done in cell number 8
 
-I implemented this step in lines # through # in my code in `yet_another_file.py` in the function `map_lane()`.  Here is an example of my result on a test image:
+![im02]
+![im03]
+![im04]
+![im05]
 
-![alt text][image6]
 
 ---
 
@@ -103,7 +106,7 @@ I implemented this step in lines # through # in my code in `yet_another_file.py`
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](./project_output.mp4)
 
 ---
 
@@ -111,4 +114,6 @@ Here's a [link to my video result](./project_video.mp4)
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+I basically used the pointers given in lecture series and used most of the logic from there
+I am basically NOT taking the average of the curvatures. I am  not fully using thr Line Class and also when I ran this on challenge_video , it did not perform well. I could tweak the code to make better use of "State" of the car and lane lines 
+and make use of Line class better
