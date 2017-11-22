@@ -19,6 +19,13 @@ The goals / steps of this project are the following:
 
 
 [im01]: ./calibration_undist/undist_calibration2.jpg "Chessboard Calibration"
+[im02]: ./projected_lanelines_output/projected_lane_lines_test1.jpg "Projected Lane line 1"
+[im03]: ./projected_lanelines_output/projected_lane_lines_test2.jpg "Projected Lane line 2"
+[im04]: ./projected_lanelines_output/projected_lane_lines_tes31.jpg "Projected Lane line 3"
+[im05]: ./projected_lanelines_output/projected_lane_lines_test4.jpg "Projected Lane line 4"
+[im06]: ./projected_lanelines_output/projected_lane_lines_test5.jpg "Projected Lane line 5"
+[im07]: ./projected_lanelines_output/projected_lane_lines_test6.jpg "Projected Lane line 6"
+
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/571/view) Points
 
@@ -40,7 +47,7 @@ The code for this step is contained in the second code cell of the IPython noteb
 
 I start by preparing "object points", which will be the (x, y, z) coordinates of the chessboard corners in the world. Here I am assuming the chessboard is fixed on the (x, y) plane at z=0, such that the object points are the same for each calibration image.  Thus, `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image.  `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection.  
 
-I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  This returned the camera caliberation coefficients whicj I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result: 
+I then used the output `objpoints` and `imgpoints` to compute the camera calibration and distortion coefficients using the `cv2.calibrateCamera()` function.  This returned the camera caliberation coefficients which I applied this distortion correction to the test image using the `cv2.undistort()` function and obtained this result. The camera distortion coefficients were saved in the file wide_dist_pickle.p to be read and used later for perspective transform 
 The undistored caliberated image is 
 ![Undistored Caliberated Image][im01]
 
@@ -54,45 +61,31 @@ To demonstrate this step, I will describe how I apply the distortion correction 
 
 #### 2. Describe how (and identify where in your code) you used color transforms, gradients or other methods to create a thresholded binary image.  
 
-Cell number 4 and 5 has code that does absolute sobel, gradient magnitude threshild and direction gradient threshold
+Cell number 4 and 5 has code that does absolute sobel, gradient magnitude threshold and direction gradient threshold
 The binary image output for this operation is displayed in the python notebook at the end of cell 5
 
 
 #### 3. Describe how (and identify where in your code) you performed a perspective transform and provide an example of a transformed image.
 
-The code for my perspective transform includes a function called `warper()`, which appears in lines 1 through 8 in the file `example.py` (output_images/examples/example.py) (or, for example, in the 3rd code cell of the IPython notebook).  The `warper()` function takes as inputs an image (`img`), as well as source (`src`) and destination (`dst`) points.  I chose the hardcode the source and destination points in the following manner:
+The code for my perspective transform is in cell 6. I first create a trapezoid region of interest and the cell includes a function called corners_unwarp which takes in the image , the number of corners and camera distortion co effcisnts and does a perpective transform. The transformed images are also displayed in the notebook. 
 
-```python
-src = np.float32(
-    [[(img_size[0] / 2) - 55, img_size[1] / 2 + 100],
-    [((img_size[0] / 6) - 10), img_size[1]],
-    [(img_size[0] * 5 / 6) + 60, img_size[1]],
-    [(img_size[0] / 2 + 55), img_size[1] / 2 + 100]])
-dst = np.float32(
-    [[(img_size[0] / 4), 0],
-    [(img_size[0] / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), img_size[1]],
-    [(img_size[0] * 3 / 4), 0]])
-```
+I randomly chose destination points from source based on offsets
 
-This resulted in the following source and destination points:
 
-| Source        | Destination   | 
-|:-------------:|:-------------:| 
-| 585, 460      | 320, 0        | 
-| 203, 720      | 320, 720      |
-| 1127, 720     | 960, 720      |
-| 695, 460      | 960, 0        |
 
 I verified that my perspective transform was working as expected by drawing the `src` and `dst` points onto a test image and its warped counterpart to verify that the lines appear parallel in the warped image.
 
-![alt text][image4]
+
 
 #### 4. Describe how (and identify where in your code) you identified lane-line pixels and fit their positions with a polynomial?
 
-Then I did some other stuff and fit my lane lines with a 2nd order polynomial kinda like this:
+I have 2 methods for this, sliding_window_polyfit in cell 7 and prev_frame_polyfit in cell 9
 
-![alt text][image5]
+The images from projecting the lane lines are
+
+![im02]
+
+
 
 #### 5. Describe how (and identify where in your code) you calculated the radius of curvature of the lane and the position of the vehicle with respect to center.
 
